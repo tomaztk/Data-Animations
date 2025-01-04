@@ -38,3 +38,5 @@ ggplot(iris, aes(x = Sepal.Length, y = Species)) +
 
 ggplot(iris, aes(x = Sepal.Length, y = Species)) +
   geom_density_ridges(scale = 0.9) 
+
+
