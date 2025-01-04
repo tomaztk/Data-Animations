@@ -91,3 +91,15 @@ grouped_ggbetweenstats(
     limits = (c(1, 9))
   )
 )
+
+
+
+grouped_ggwithinstats(
+  data            = dplyr::filter(bugs_long, region %in% c("Europe", "North America"), condition %in% c("LDLF", "LDHF")),
+  x               = condition,
+  y               = desire,
+  type            = "np",
+  xlab            = "Condition",
+  ylab            = "Desire to kill an artrhopod",
+  grouping.var    = region
+)
