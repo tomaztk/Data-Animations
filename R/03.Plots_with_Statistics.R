@@ -45,13 +45,49 @@ plt <- plt +
 plt
 
 
+### Extracting statistics
 
-grouped_ggwithinstats(
-  data            = dplyr::filter(bugs_long, region %in% c("Europe", "North America"), condition %in% c("LDLF", "LDHF")),
-  x               = condition,
-  y               = desire,
-  type            = "np",
-  xlab            = "Condition",
-  ylab            = "Desire to kill an artrhopod",
-  grouping.var    = region
+
+p <- ggbetweenstats(mtcars, am, mpg)
+# extracting details from statistical tests
+extract_stats(p)
+
+
+# modifying defaults
+ggbetweenstats(
+  morley,
+  x    = Expt,
+  y    = Speed,
+  type = "robust",
+  xlab = "The experiment number",
+  ylab = "Speed-of-light measurement"
+)
+
+
+# Grouped between stats ! 
+
+library(dplyr, warn.conflicts = FALSE)
+library(ggplot2)
+
+grouped_ggbetweenstats(
+  data = filter(ggplot2::mpg, drv != "4"),
+  x = year,
+  y = hwy,
+  grouping.var = drv
+)
+
+# modifying individual plots using `ggplot.component` argument
+grouped_ggbetweenstats(
+  data = filter(
+    movies_long,
+    genre %in% c("Action", "Comedy"),
+    mpaa %in% c("R", "PG")
+  ),
+  x = genre,
+  y = rating,
+  grouping.var = mpaa,
+  ggplot.component = scale_y_continuous(
+    breaks = seq(1, 9, 1),
+    limits = (c(1, 9))
+  )
 )
